@@ -135,3 +135,59 @@ baseball.url <- "http://jse.amstat.org/datasets/baseball.dat.txt"
 baseball <- read.table(file = baseball.url, header = FALSE, sep = "")
 
 head(baseball)
+str(baseball)
+
+# Naming stuff from an imported dataset ----
+new_baseball <- baseball[,c(18, 1:5, 8, 13)]
+names(new_baseball) <- c("Player Name", "Salary (Thousands)", "Batting Average", "On-Base Percentage", "Runs", "Hits", "Home Runs", "Errors")
+
+# Identifying the player with the highest salary
+subset(new_baseball, `Salary (Thousands)` == max(new_baseball[,2]))[c(1, 2)]
+with(new_baseball, expr = `Player Name`[`Salary (Thousands)` == max(`Salary (Thousands)`)])
+new_baseball$`Player Name`[new_baseball$`Salary (Thousands)` == max(new_baseball$`Salary (Thousands)`)]
+
+# Calculate summary statistics on home runs
+summary(new_baseball[,"Home Runs"])
+
+# write.table() and write.csv() ----
+myhospital <- read.table(file = file.choose(), header = TRUE, sep = " ", na.strings = "*")
+myhospital$pain <- factor(myhospital$pain, ordered = TRUE, levels = c("none", "mild", "medium", "severe"))
+myhospital
+str(myhospital)
+
+write.table(x = myhospital, file = "some_new_file.txt", sep = "\t", na = "-", quote = FALSE, row.names = FALSE)
+file.show("some_new_file.txt")
+
+write.csv(x = myhospital, file = "some_new_file.csv", na = "*", row.names = FALSE, quote = FALSE)
+file.show("some_new_file.csv")
+
+# Creating a dataframe from the keyboard ----
+sleep <- data.frame()
+sleep <- edit(sleep)
+sleep
+
+write.table(x = sleep, file = "stu_sleep.txt", na = "*", sep = "\t", row.names = FALSE, quote = FALSE)
+file.show("stu_sleep.txt")
+write.csv(x = sleep, file = "stu_sleep.csv", na = "*", row.names = FALSE, quote = FALSE)
+file.show("stu_sleep.csv")
+
+# dump() ----
+myhospital
+str(myhospital)
+dump(list = "myhospital", file = "useful.R")
+
+rm(myhospital)
+myhospital
+
+source("useful.R")
+myhospital
+
+# Adding multiple objects to a dump() ----
+dump(list = c("myhospital", "sleep"), file = "useful.R")
+
+rm(myhospital, sleep)
+ls()
+source("useful.R")
+ls()
+myhospital
+sleep
