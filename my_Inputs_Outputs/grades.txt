@@ -1,0 +1,24 @@
+Course: STAT 216 
+Semester: Spring 2024
+Instructor: J D
+Classroom: Main XXX
+Lecture Hours: MWF 1:00-1:50pm
+Office Hours: MWF 8:00-9:00am
+-----------------------------------------------------------------------------------
+Name	Quiz1	Quiz2	Quiz3	Quiz4	Quiz5	Quiz6	Quiz7	Participation	Exam1	Exam2	Exam3
+Darby	7	18	14	16	14	18	10	0	96	81	78
+Caitlin	9	13	9	14	14	14	13	0	83	71	68
+Alla	9	16	16	16	16	16	20	0	94	88	65
+Wendy	9	16	10	16	16	14	16	5	87	70	74
+Joshua	7	16	16	16	16	14	19	5	87	62	100
+Kati	9	20	20	20	20	20	20	6	97	93	100
+Luke	10	12	10	*	*	4	*	0	74	30	40
+Angela	7	16	*	*	*	*	*	0	29	*	*
+Adrian	9	16	18	16	20	18	20	3	70	80	99
+Natalie	8	14	20	16	18	12	20	3	77	85	75
+Kenya	7	20	18	16	20	18	18	10	74	78	80
+Harlie	10	12	14	16	14	15	20	10	92	59	97
+Nathan	10	14	*	10	4	*	*	0	91	44	*
+Emma	9	18	16	19	14	16	20	5	71	59	88
+Jane	5	12	10	15	9	12	12	0	65	71	74
+Amy	10	18	15	15	16	18	14	5	94	90	86

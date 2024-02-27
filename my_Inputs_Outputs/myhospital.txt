@@ -1,0 +1,8 @@
+patients pain gender age weight
+Alex none F 65 148
+Fred severe M 48 205
+Nancy mild F * 218
+Cloe mild F 29 195
+Jack medium M 77 226
+Emma severe F * *
+Tom mild M 35 181
