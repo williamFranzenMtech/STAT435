@@ -1,0 +1,13 @@
+  patients pain gender age weight
+3    Nancy mild      F  NA    218
+4     Cloe mild      F  29    195
+
+
+ Descriptive statistics on Age variable: 
+
+ 29 35 48 50.8 65 77 2 
+
+
+ Descriptive statistics on Weight variable: 
+
+ 148 184.5 200 195.5 214.75 226 1
