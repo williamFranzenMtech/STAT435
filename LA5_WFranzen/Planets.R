@@ -84,3 +84,62 @@ slow_planets_df <- subset(planets_df, (abs(ROTATION) > 1.0))
 slow_planets_df
 
 # k: Write one line of code that identifies the planet with the smallest diameter.
+subset(planets_df, DIAMETER == min(planets_df$DIAMETER), NAME)
+
+# Q5 ----
+
+# a: Add the number of moons to planets_df
+planets_df$MOON <- c(1, 0, 0, 2, 67, 62, 27, 14)
+
+# b: Add the mass of the planet to planets_df
+planets_df$MASS <- c(1.00, 0.06, 0.82, 0.11, 317.8, 95.2, 14.6, 17.2)
+
+# c: Print planets_df
+planets_df
+
+# d: Display the structure of planets_df
+str(planets_df)
+
+#'data.frame':	8 obs. of  7 variables:
+#$ NAME     : chr  "Earth" "Mercury" "Venus" "Mars" ...
+#$ TYPE     : Factor w/ 2 levels "Gas giant","Terrestrial planet": 2 2 2 2 1 1 1 1
+#$ DIAMETER : num  1 0.382 0.949 0.532 11.209 ...
+#$ ROTATION : num  1 58.64 -243.02 1.03 0.41 ...
+#$ HAS_RINGS: logi  FALSE FALSE FALSE FALSE TRUE TRUE ...
+#$ MOON     : num  1 0 0 2 67 62 27 14
+#$ MASS     : num  1 0.06 0.82 0.11 317.8 ...
+
+# e: Write one line of code that identifies the planets that have rings and mass greater than 50.
+subset(planets_df, (MASS > 50 & HAS_RINGS), NAME)
+# Jupiter and Saturn
+
+# f: Use with() to calculate the average number of moons for the gas giant planets.
+gas_giants <- subset(planets_df, TYPE == "Gas giant")
+with(gas_giants, mean(MOON))
+
+# Q6 ----
+
+# Resetting the planets to exclude the mass and moons.
+planets_df <- data.frame(list(planets = planets, type = type, diameter = diameter, rotation = rotation, rings = rings))
+names(planets_df) <- c("NAME", "TYPE", "DIAMETER", "ROTATION", "HAS_RINGS")
+# a: Create a dataframe for Pluto.
+
+pluto_df <- data.frame(NAME = "Pluto", TYPE = "Terrestrial planet", DIAMETER = 0.18, ROTATION = -6.38, HAS_RINGS = FALSE)
+
+planets_df_ext <- do.call(rbind, list(planets_df, pluto_df))
+
+# b: Print the new dataframe
+
+planets_df_ext
+
+# Q7 ----
+
+# a: Assign the variable positions the order
+positions <- order(planets_df_ext$DIAMETER, decreasing = TRUE)
+positions
+
+# b: Create the dataframe largest_first_df using the order from the positions
+largest_first_df <- planets_df_ext[positions,]
+
+# c: Print largest_first_df
+largest_first_df
