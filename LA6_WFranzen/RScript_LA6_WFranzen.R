@@ -44,13 +44,15 @@ sink("sumstats.txt")
 # c: Add the statistics for murders for the South region.
 cat("Summary Statistics on No. Gun Murders in the South", "\n")
 summary(
-  subset(murders, subset = (region == "South"), select = total)
+  murders$total[murders$region == "South"]
+  #subset(murders, subset = (region == "South"), select = total)
 )
 
 # d: Leave a blank line, then the statistics for murders for the West region.
 cat("\n", "Summary Statistics on No. of Gun Murders in the West", "\n")
 summary(
-  subset(murders, subset = (region == "West"), select = total)
+  murders$total[murders$region == "West"]
+  #subset(murders, subset = (region == "West"), select = total)
 )
 
 # e: Use sink() to close the sink
@@ -76,14 +78,15 @@ write.csv(newsurvey, file = "survey.csv", quote = FALSE, row.names = FALSE)
 # e: Read this csv into survey_in
 survey_in <- read.csv(file = "survey.csv")
 
-# f: Display the structure of this dataframe.
+# f: Display the structure of this dataframe. 5 obs, 18 variables.
 str(survey_in)
 
-# g: Calculate statistics
-summary(survey_in$age)
+# g: Calculate statistics for age in years.
+summary(survey_in$age / 12)
 
 # h: Percentage of students who slept at least 7 hours
-survey_in$sleephours
+100 * sum(survey_in$sleephours >= 7) / length(survey_in$sleephours)
+
 
 # Q4: Reading remote files ----
 beef <- read.table(file = "http://jse.amstat.org/v22n1/kopcso/BeefDemand.txt", header = TRUE)
@@ -91,5 +94,5 @@ beef <- read.table(file = "http://jse.amstat.org/v22n1/kopcso/BeefDemand.txt", h
 beef
 
 # Print data from 1990 to 2000
-beef.demand.sub <- with(beef, subset(beef, subset = (Year >= 1990 & Year <= 2000)))
+beef.demand.sub <- with(beef, subset(beef, subset = (Year >= 1990)))
 beef.demand.sub

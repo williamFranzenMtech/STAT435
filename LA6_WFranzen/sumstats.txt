@@ -1,17 +1,7 @@
 Summary Statistics on No. Gun Murders in the South 
-     total      
- Min.   : 27.0  
- 1st Qu.:111.0  
- Median :207.0  
- Mean   :246.8  
- 3rd Qu.:293.0  
- Max.   :805.0  
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   27.0   111.0   207.0   246.8   293.0   805.0 
 
  Summary Statistics on No. of Gun Murders in the West 
-     total     
- Min.   :   5  
- 1st Qu.:  12  
- Median :  36  
- Mean   : 147  
- 3rd Qu.:  84  
- Max.   :1257  
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      5      12      36     147      84    1257 
