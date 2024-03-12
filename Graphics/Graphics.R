@@ -151,11 +151,157 @@ automaticcyl
 manualcyl
 
 # Create a 2x3 table displaying the counts for cyl and am variables
-cylmatrix <- cbind(automaticcyl, manualcyl)
-rownames(cylmatrix) <- c("V4", "V6", "V8")
-colnames(cylmatrix) <- c("Automatic", "Manual")
+cylmatrix <- rbind(automaticcyl, manualcyl)
+colnames(cylmatrix) <- c("V4", "V6", "V8")
+rownames(cylmatrix) <- c("Automatic", "Manual")
 cylmatrix
 
 # Create a 2x3 table displaying the percentages
 cylmatrixperc <- prop.table(cylmatrix) * 100
 cylmatrixperc
+
+# Bar Plots ----
+barplot(c(11, 7, 14))
+# or
+barplot(table(mtcars$cyl))
+
+barplot(cyl.freq,
+        main = "Performance Car Counts by No. of Cylinders",
+        col.main = "blue",
+        xlab = "No. of Cylinders",
+        ylab = "Frequency",
+        names.arg = c("v4", "v6", "v8"),
+        col = "lightblue",
+        axis.lty = 1)
+
+bar.means <- tapply(mtcars$mpg, mtcars$cyl, mean)
+bar.means
+
+barplot(bar.means,
+        axis.lty = 1,
+        main = "Mean MPG by Number of Cylinders",
+        xlab = "No. of Cylinders",
+        ylab = "Mean",
+        names.arg = c("v4", "v6", "v8"),
+        ylim = c(0, 30))
+
+bar.sd <- tapply(mtcars$mpg, mtcars$cyl, sd)
+bar.sd
+
+barplot(bar.sd,
+        axis.lty = 1,
+        main = "Standard Deviation of MPG\nby Number of Cylinders",
+        xlab = "No. of Cylinders",
+        ylab = "Mean",
+        names.arg = c("v4", "v6", "v8"),
+        ylim = c(0, 5))
+
+# Create a table of frequencies by am
+am.freq <- table(mtcars$am)
+am.freq
+
+names(am.freq) <- c("automatic", "manual")
+am.freq
+
+# Produce barplot of am.freq
+barplot(am.freq,
+        axis.lty = 1,
+        main = "Performance Car Counts by Transmission",
+        xlab = "Transmission",
+        ylab = "Frequency",
+        ylim = c(0, 20),
+        font.lab = 2,
+        col = "pink",
+        )
+
+mean.mpg <- tapply(mtcars$mpg, mtcars$am, mean)
+mean.mpg
+barplot(mean.mpg,
+        axis.lty = 1,
+        main = "Mean MPG (Miles/US Gallon) by Transmission Type",
+        xlab = "Transmission",
+        ylab = "Mean",
+        ylim = c(0, 25),
+        col.main = "red",
+        font.axis = 2
+        )
+
+barplot(cylmatrix,
+        horiz = TRUE, # Makes it horizontal instead of vertical
+        main = "Performance car counts\nby Transmission and Cylinders",
+        xlab = "Counts",
+        beside = TRUE, # Sets them clustered instead of stacked
+        xlim = c(0, 14),
+        las = 1, # Labels to appear horizontally
+        cex.main = 1.5 # Size of title
+        )
+
+legend("bottomright",
+       legend = c("manual", "automatic"),
+       fill = c("gray", "black"),
+       cex = 1)
+
+# Pie Charts ----
+group.per <- c(18, 30, 32, 10, 10)
+pie(group.per,
+    labels = c("A, 18%", "B, 30%", "C, 32%", "D, 10%", "F, 10%"),
+    col = c("gray", "white", "gray", "black", "gray90"),
+    main = "Letter Grade Distribution")
+
+# Produce a pie chart for cyl for mtcars
+cyltab <- table(mtcars$cyl)
+cyltab
+pie(cyltab,
+    labels = c("V4, 11", "V6, 7", "V8, 14"),
+    main = "Count of Performance Cars\nby Number of Cylinders",
+    col = c("white", "blue", "pink"))
+
+cyltabperc <- prop.table(table(mtcars$cyl))*100
+pie(cyltabperc,
+    labels = c("V4, 34.375%", "V6, 21.875%", "V8, 43.750%"),
+    main = "Count of Performance Cars\nby Number of Cylinders",
+    col = c("white", "blue", "pink"))
+
+# Adding lines n' stuff ----
+x <- c(3, 1, 9, 8, 25, 18)
+y <- c(2, 13, 8, 6, 11, 9)
+
+plot(x, y)
+
+abline(h=4)
+abline(v=5)
+
+abline(h=10, col="red", lty=2)
+abline(v=15, col="green", lwd=2, lty=3)
+
+plot(x, y)
+lines(x = c(15, 25), y = c(4, 10), lty = "dashed", col = "blue", lwd = 2)
+
+
+segments(x0 = 5, y0 = 12, x1 = 20, y1 = 4)
+segments(x0 = 5, y0 = 12, x1 = 20, y1 = 4, lty = 2, col = "blue")
+segments(x0 = 5, y0 = 10, x1 = 25, y1 = 5, lty = "dotted", col = "red", lwd = 2)
+
+# Exercise: Plot the graph displayed in the notesheets n' stuff
+plot(x, y, pch=19)
+abline(h=10, col="blue", lty="dashed", lwd=2)
+abline(h=5, col="blue", lty="dashed", lwd=2)
+lines(x = c(5,5), y = c(5,10), col="red", lty="dotted", lwd = 2)
+lines(x = c(20,20), y = c(5,10), col="red", lty="dotted", lwd = 2)
+
+# Histograms n' stuff ----
+hist(mtcars$hp)
+
+hist(mtcars$hp,
+     breaks = 15,
+     main = "Histogram of Gross Horsepower",
+     xlab = "HP",
+     col = "lightgreen")
+
+hist(mtcars$hp,
+     breaks = 15,
+     main = "Histogram of Gross Horsepower",
+     xlab = "HP",
+     col = "lightgreen",
+     freq = FALSE, # Density instead of frequency
+     )
