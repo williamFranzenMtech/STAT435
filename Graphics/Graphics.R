@@ -305,3 +305,152 @@ hist(mtcars$hp,
      col = "lightgreen",
      freq = FALSE, # Density instead of frequency
      )
+
+hist(mtcars$hp,
+     breaks = seq(from = 0, to = 400, by = 25),
+     main = "Histogram of Gross Horsepower\nfor 32 automobiles (1973-74 models)",
+     xlab = "HP",
+     col = "lightblue"
+     )
+
+# lines() can be used, but segments() is more efficient n' stuff.
+#lines(x = c(mean(mtcars$hp), mean(mtcars$hp)), y = c(0, 8),
+#      lty = "dashed", col = "red", lwd = 2)
+#lines(x = c(median(mtcars$hp), median(mtcars$hp)), y = c(0, 8),
+#      lty = "dotted", col = "red", lwd = 2)
+
+segments(x0 = c(mean(mtcars$hp), median(mtcars$hp)), y0 = c(0, 0),
+         x1 = c(mean(mtcars$hp), median(mtcars$hp)), y1 = c(8, 8),
+         col = "red",
+         lty = c("dashed", "dotted"),
+         lwd = 2)
+
+legend("topright", legend = c("mean HP", "median HP"),
+       lty = c("dashed", "dotted"),
+       lwd = 2, col = "red")
+
+# Density for histograms n' stuff ----
+hist(mtcars$hp,
+     breaks = 6,
+     freq = FALSE,
+     xlab = "HP",
+     main = "Histogram of Gross Horsepower",
+     col = "lightblue")
+
+lines(density(mtcars$hp), col = "red", lwd = 2)
+
+# Histogram for discrete variables ----
+set.seed(111)
+disc.samp <- sample(1:6, size = 100, replace = TRUE)
+disc.samp
+
+plot(table(disc.samp),
+     type = "h",
+     lwd = 10,
+     xlab = "Outcomes",
+     ylab = "Frequency")
+
+barplot(prop.table(table(disc.samp)),
+       names.arg = 1:6,
+       xlab = "Outcomes",
+       ylab = "Probability",
+       axis.lty = 1,
+       ylim = c(0, 0.25))
+
+# Boxplots n' Stuff ----
+boxplot(mtcars$hp)
+
+boxplot(mtcars$hp ~ mtcars$cyl,
+        main = "Boxplots of Gross Horsepower\nby Number of Cylinders",
+        xlab = "No. of Cylinders",
+        ylab = "Horsepower",
+        pch = 16,
+        names = c("v4", "v6", "v8"))
+
+
+# Calculating mean of hp by cyl and adding this to the plot n' stuff
+tapply(mtcars$hp, mtcars$cyl, mean)
+
+text(x = 1, y = 280,
+     labels = "Means:\nv4 = 82.636\nv6 = 122.286\nv8 = 209.214",
+     col = "blue")
+
+
+# Exercises ----
+# Exercise 1 ====
+boxplot(mtcars$wt ~ mtcars$am,
+        main = "Boxplots for Comparing Weights of Automobiles\nby Transmission Type",
+        xlab = "Transmission",
+        ylab = "Weight (1000 lbs)",
+        names = c("automatic", "manual"),
+        col = c("gray", "lightblue")
+        )
+
+tapply(mtcars$wt, mtcars$am, median)
+
+text(x = 2, y = 5,
+     labels = "Medians:\nautomatic = 3.52\nmanual = 2.32",
+     col = "red")
+
+# Exercise 2 ====
+boxplot(mtcars$wt ~ mtcars$am,
+        main = "Boxplots for Comparing Weights of Automobiles\nby Transmission Type",
+        xlab = "Transmission",
+        ylab = "Weight (1000 lbs)",
+        names = c("automatic", "manual"),
+        col = c("gray", "lightblue")
+        )
+text(x = 2.1, y = 5,
+     labels = "outliers",
+     col = "red",
+     font = 2)
+arrows(x0 = 2, x1 = 1.02,
+       y0 = 5, y1 = 5.32,
+       col = "red")
+arrows(x0 = 2, x1 = 1.02,
+       y0 = 5, y1 = 2.4,
+       col = "red")
+
+# Generic plot() function
+source("useful.R")
+str(myhospital)
+
+plot(myhospital$pain) # Bar plot
+plot(myhospital$gender, myhospital$pain) # Stacked Bar Plot
+plot(myhospital$age, myhospital$weight) # Scatterplot
+
+# Scatterplots ----
+which(colnames(iris) == "Petal.Length")
+which(colnames(iris) == "Petal.Width")
+plot(iris[,3], iris[,4],
+     xlab = "Petal Length (cm)",
+     ylab = "Petal Width (cm)")
+
+with(iris, plot(Petal.Length, Petal.Width,
+                xlab = "Petal Length (cm)",
+                ylab = "Petal Width (cm)"))
+
+plot(iris[,3], iris[,4],
+     type = "n",
+     xlab = "Petal Length (cm)",
+     ylab = "Petal Width (cm)")
+points(iris[iris$Species == "setosa", 3],
+       iris[iris$Species == "setosa", 4], pch = 1, col = "black")
+points(iris[iris$Species == "versicolor", 3],
+       iris[iris$Species == "versicolor", 4], pch = 2, col = "blue")
+points(iris[iris$Species == "virginica", 3],
+       iris[iris$Species == "virginica", 4], pch = 3, col = "red")
+
+legend("topleft", legend = c("setosa", "versicolor", "virginica"),
+       pch = c(1, 2, 3),
+       col = c("black", "blue", "red"))
+
+
+plot(iris[,1:4], pch = rep(1:3, each = 50))
+
+pairs(iris[,1:4], pch = rep(1:3, each = 50),
+      col = rep(c("black", "red", "blue"), each = 50),
+      main = "Scatterplot matrix of the \"iris\" data set",
+      cex.labels = 0.75,
+      cex = 0.75
+      )
