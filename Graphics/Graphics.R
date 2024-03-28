@@ -454,3 +454,51 @@ pairs(iris[,1:4], pch = rep(1:3, each = 50),
       cex.labels = 0.75,
       cex = 0.75
       )
+
+
+# Q-Q Plots n' Stuff ----
+head(iris)
+qqnorm(iris$Sepal.Length, main = "Normal Q-Q Plot: Sepal.Length")
+qqline(iris$Sepal.Length)
+
+par(mfrow = c(1, 3))
+qqnorm(iris$Sepal.Length[iris$Species == "setosa"], main = "Q-Q Plot: Sepal.Length\nfor Setosa")
+qqline(iris$Sepal.Length[iris$Species == "setosa"])
+qqnorm(iris$Sepal.Length[iris$Species == "virginica"], main = "Q-Q Plot: Sepal.Length\nfor Virginica")
+qqline(iris$Sepal.Length[iris$Species == "virginica"])
+qqnorm(iris$Sepal.Length[iris$Species == "versicolor"], main = "Q-Q Plot: Sepal.Length\nfor Versicolor")
+qqline(iris$Sepal.Length[iris$Species == "versicolor"])
+
+
+# Curve Function ----
+par(mfrow = c(1, 1))
+curve(dnorm, from = -3.5, to = 3.5,
+      main = "Standard Normal Density Function",
+      col = "blue",
+      lwd = 3,
+      xlab = "Z",
+      ylab = "Density")
+
+# Other curve types
+curve(x^2-3*x, from = -2, to = 2, col = "green", lwd = 2)
+curve(x^2-2, add = TRUE, col = "violet", lwd = 2, lty = 2)
+
+# Exercise Thingy
+z <- seq(-3.5,3.5, length.out = 100)
+fz <- dnorm(z)
+plot(z, fz, main = "Standard Normal Distribution", type = "l",
+     ylab = "Density", xlab = "Z",
+     col = "blue", lwd = 3)
+abline(h=0)
+region.z <- z[-0.5 < z & z < 2]
+region.fz <- fz[-0.5 < z & z < 2]
+region.z <- c(region.z[1], region.z, tail(region.z,1))
+region.fz <- c(0, region.fz, 0)
+polygon(region.z, region.fz, density=-2, col="red")
+
+region2.z <- z[z < -0.5]
+region2.fz <- fz[z < -0.5]
+region2.z <- c(region2.z[1], region2.z, tail(region2.z,1))
+region2.fz <- c(0, region2.fz, 0)
+polygon(region2.z, region2.fz, density=-2, col="coral")
+
