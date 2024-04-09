@@ -232,7 +232,7 @@ arrows(10, 0.09, 8, 0.06)
 qexp(0.98, 1/6)
 
 # Find the median of the distribution
-median(dexp(thisrange, 1/6))
+qexp(0.5, 1/6)
 
 # Find the mean and standard deviation
 mean(dexp(thisrange, 1/6))
