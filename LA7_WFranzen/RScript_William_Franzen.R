@@ -1,5 +1,5 @@
-# STAT 435 Lab Assignment 7
-# By William Franzen
+# STAT 435 Lab 7
+# William Franzen
 
 # 1. X ~ Bin(n = 20, p = 0.73) ----
 n <- 20
@@ -136,10 +136,10 @@ shade <- seq(0, 5, length.out = 200)
 fshade <- dexp(shade, lam)
 polygon(c(0, shade, 5), c(0, fshade, 0), density=-1, col="gray")
 
-text(x = 12, y = 0.15,
-     labels ="P(X ≤ 5) = 0.7134952",
+text(x = 12, y = 0.1,
+     labels ="P(X <= 5) = 0.7134952",
      col = "red")
-arrows(11, 0.13, 3.8, 0.1,
+arrows(11, 0.09, 5, 0.07,
        col = "red",
        lwd = 2)
 
@@ -150,29 +150,8 @@ plot(1, 1,
      type="n",
      xlim = c(0, 60),
      ylim = c(0, 0.2),
-     main = "Three Different Normal Density Curves\nwith Different Centers and Spreads",
      xlab = "X",
      ylab = "f(x)")
-lines(range5, dnorm(range5, 20, 6),
-      lty = 1,
-      col = "red",
-      lwd = 2)
-lines(range5, dnorm(range5, 30, 10),
-      lty = 2,
-      col = "blue",
-      lwd = 2)
-lines(range5, dnorm(range5, 40, 2),
-      lty = 3,
-      col = "green4",
-      lwd = 2)
-
-legend("topleft",
-       legend = c(
-         expression(paste(mu, " = 20, ", sigma, " = 6")),
-         expression(paste(mu, " = 30, ", sigma, " = 10")),
-         expression(paste(mu, " = 40, ", sigma, " = 2"))
-         ),
-       lty = 1:3,
-       lwd = 2,
-       col = c("red", "blue", "green4"))
-
+lines(dnorm(range5, 20, 6))
+lines(dnorm(range5, 30, 10))
+lines(dnorm(range5, 40, 2))

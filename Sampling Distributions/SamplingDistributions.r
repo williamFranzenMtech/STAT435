@@ -91,12 +91,14 @@ mu
 
 sigma <- sqrt(sum((xs**2)*probs)-(mu**2))
 sigma
+
 #b)
 n = 64
 m.xbar <- mu
 s.xbar <- sigma/(sqrt(n))
 m.xbar
 s.xbar
+
 #c)
 x.dist <- data.frame(xs, probs)
 x.dist
@@ -104,3 +106,16 @@ sum(x.dist$probs[x.dist$xs > 1])
 
 #d)
 pnorm(1,mean=m.xbar, sd=s.xbar,lower.tail=FALSE)
+
+# Example: Testing a fair coin with 200 times ----
+n <- 200
+p <- 0.5
+
+# Using a binomial distribution
+diff(pbinom(c(80, 120), n, p))
+
+# Using a normal distribution
+diff(pnorm(c(80, 120), n*p, sqrt(n*p*(1-p))))
+
+# Doing proportions n' stuff
+pnorm(0.6, p, sqrt(p*(1-p)/n)) - pnorm(0.4, p, sqrt(p*1*(1-p)/n))
