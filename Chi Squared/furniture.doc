@@ -1,0 +1,6 @@
+
+	Pearson's Chi-squared test
+
+data:  defects
+X-squared = 19.178, df = 6, p-value = 0.003873
+
