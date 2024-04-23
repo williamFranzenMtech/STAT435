@@ -77,6 +77,45 @@ text(18, 0.065,
 # Example 2 ----
 library(openxlsx)
 student <- read.xlsx("Student.xlsx")
+gender <- student$Gender
+seatbelt <- student$Belts
 
+genderbelt <- table(seatbelt, gender)
+genderbelt
+xsq <- chisq.test(genderbelt)
+
+xsq
+# p = 0.1004; don't accept the alt. hypothesis.
+# Gender and Seatbelt usage are independent from each other.
+
+barplot(genderbelt, beside = TRUE,
+        main = "Comparison of Seatbelt Usage by Gender",
+        xlab = "Gender",
+        ylab = "Percent",
+        col = c("cyan3", "magenta3", "yellow3", "gray24"),
+        legend.text = c("Always", "Never", "Sometimes", "Usually"),
+        args.legend = list(x = "topright"))
 
 # Example 3 ----
+grade2 <- c(14.71, 32.35, 26.47, 26.47)
+grade4 <- c(23.53, 44.12, 26.47, 5.88)
+grade6 <- c(9.38, 75.00, 12.50, 3.12)
+
+reasonstable <- as.table(cbind(grade2, grade4, grade6))
+reasonstable
+
+dimnames(reasonstable) <- list(Type = c("External", "Internal", "Introject", "Irrelev"),
+                               Grade = c("Grade2", "Grade4", "Grade6"))
+
+reasonstable
+xsq <- chisq.test(reasonstable)
+xsq
+# p < 0.05, accept the alt. hypothesis; they are dependent of age.
+
+barplot(reasonstable, beside = TRUE,
+        main = "Comparison of Types of Reasons for Doing Homework\nwithin each School Grade Category",
+        xlab = "School Grade (age)",
+        ylab = "Percent",
+        col = c("cyan3", "magenta3", "yellow3", "gray24"),
+        legend.text = c("External", "Internal", "Introjected", "Irrelevant"),
+        args.legend = list(x = "topleft"))
