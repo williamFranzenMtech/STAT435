@@ -81,7 +81,6 @@ gender <- student$Gender
 seatbelt <- student$Belts
 
 genderbelt <- table(seatbelt, gender)
-genderbelt
 xsq <- chisq.test(genderbelt)
 
 xsq
@@ -97,25 +96,48 @@ barplot(genderbelt, beside = TRUE,
         args.legend = list(x = "topright"))
 
 # Example 3 ----
-grade2 <- c(14.71, 32.35, 26.47, 26.47)
-grade4 <- c(23.53, 44.12, 26.47, 5.88)
-grade6 <- c(9.38, 75.00, 12.50, 3.12)
+hw <- read.xlsx("Homework.xlsx")
+reasons <- table(hw$TypeReas, hw$SchGrade)
+reasons
 
-reasonstable <- as.table(cbind(grade2, grade4, grade6))
-reasonstable
+grade.per <- prop.table(reasons, 2)*100
+grade.per <- round(grade.per, digits=2)
+grade.per
 
-dimnames(reasonstable) <- list(Type = c("External", "Internal", "Introject", "Irrelev"),
+
+dimnames(grade.per) <- list(Type = c("External", "Internal", "Introject", "Irrelev"),
                                Grade = c("Grade2", "Grade4", "Grade6"))
 
-reasonstable
-xsq <- chisq.test(reasonstable)
+xsq <- chisq.test(reasons)
 xsq
-# p < 0.05, accept the alt. hypothesis; they are dependent of age.
+# p = 0.003404 < 0.05, accept the alt. hypothesis; they are dependent of age.
 
-barplot(reasonstable, beside = TRUE,
+barplot(grade.per, beside = TRUE,
         main = "Comparison of Types of Reasons for Doing Homework\nwithin each School Grade Category",
         xlab = "School Grade (age)",
         ylab = "Percent",
         col = c("cyan3", "magenta3", "yellow3", "gray24"),
         legend.text = c("External", "Internal", "Introjected", "Irrelevant"),
+        args.legend = list(x = "topleft"))
+
+# Doing the same thing, but omitting "Irrelevant"
+new.hw <- subset(hw, subset = (hw$TypeReas != "Irrelev"))
+new.hw
+
+grade.new.per <- prop.table(table(new.hw), 2)*100
+grade.new.per
+
+
+addmargins(table(new.hw))
+
+new.xsq <- chisq.test(table(new.hw))
+new.xsq
+# p = 0.06518 > 0.05, fail to reject the Null Hypothesis; they are independent of age.
+
+barplot(grade.new.per, beside = TRUE,
+        main = "Comparison of Types of Reasons for Doing Homework\nwithin each School Grade Category",
+        xlab = "School Grade (age)",
+        ylab = "Percent",
+        col = c("cyan3", "magenta3", "yellow3"),
+        legend.text = c("External", "Internal", "Introjected"),
         args.legend = list(x = "topleft"))
